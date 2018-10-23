@@ -1,0 +1,9 @@
+﻿Sub range2pdf()
+
+'Export Range "A1:E15" in Sheet "Comment" as pdf file
+    Sheets("Comment").Range("A1:E15").ExportAsFixedFormat Type:=xlTypePDF, Filename:= _
+        "D:\Jian\Exceltest\new\Sales Report 22.10.18.pdf", Quality:=xlQualityStandard _
+        , IncludeDocProperties:=True, IgnorePrintAreas:=False, OpenAfterPublish:= _
+        True
+
+End Sub
