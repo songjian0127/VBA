@@ -1,0 +1,42 @@
+Sub CopySheets()
+Dim FilePath As Variant
+Dim Currentfilename As String
+Dim FileName As String
+Dim WBs As Workbook
+
+Application.ScreenUpdating = False
+
+'Get current file name
+Currentfilename = ThisWorkbook.Name
+
+'Get FilePath for the source file
+FilePath = Workbooks(Currentfilename).Sheets("SourceFile").Range("A1")
+
+'Open sourcefile
+Workbooks.Open (FilePath)
+
+'Get source file name
+If FilePath <> False Then
+   Dim FSO As Object
+   Dim objFile As Object
+
+    Set FSO = VBA.CreateObject("Scripting.FileSystemObject")
+    Set objFile = FSO.GetFile(FilePath)
+
+    If Not objFile Is Nothing Then
+        FileName = objFile.Name
+    End If
+
+End If
+
+'Copy specific range from source file to specified range in current file(Values only)
+Workbooks(FileName).Sheets("Melbourne Summary").Range("F90:F94").Copy
+    Workbooks(Currentfilename).Sheets("Weekly").Range("C3:C7").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+'Close source file without saving ("False" will skip saving and close file directly")
+For Each WBs In Application.Workbooks
+If WBs.Name = FileName Then WBs.Close False
+Next
+
+End Sub
