@@ -1,7 +1,7 @@
 Sub filterRange()
 
 ' ----------------------------------------------------
-' Pass date to a Long variable to be used in AutoFilter
+' Passing date to a Long variable to be used in AutoFilter
 ' https://www.ozgrid.com/VBA/autofilter-vba-dates.htm
 ' ----------------------------------------------------
 
@@ -24,11 +24,11 @@ lDate = dDate
 '                      AutoFilter
 ' ----------------------------------------------------
 
-'Filter on an exact date from Cell "N1"
+'Filter with an exact date stored in Cell "N1"
     ActiveSheet.Range("$A$1:$G$11").AutoFilter Field:=6, Criteria1:=">=" & lDate, _
     Operator:=xlAnd, Criteria2:="<" & lDate + 1
 
-'Second Criteria
+'The second criteria
     ActiveSheet.Range("$A$1:$G$11").AutoFilter Field:=7, Criteria1:="TRUE"
     
 ' ----------------------------------------------------
